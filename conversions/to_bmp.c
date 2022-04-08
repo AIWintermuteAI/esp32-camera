@@ -110,9 +110,9 @@ static bool _rgb_write(void * arg, uint16_t x, uint16_t y, uint16_t w, uint16_t 
     for(iy=t; iy<b; iy+=jw) {
         o = out+iy+l;
         for(ix=0; ix<w; ix+= 3) {
-            o[ix] = data[ix+2];
+            o[ix] = data[ix];
             o[ix+1] = data[ix+1];
-            o[ix+2] = data[ix];
+            o[ix+2] = data[ix+2];
         }
         data+=w;
     }
@@ -287,14 +287,14 @@ bool fmt2rgb888(const uint8_t *src_buf, size_t src_len, pixformat_t format, uint
             v = *src_buf++;
 
             yuv2rgb(y0, u, v, &r, &g, &b);
-            *rgb_buf++ = b;
-            *rgb_buf++ = g;
             *rgb_buf++ = r;
+            *rgb_buf++ = g;
+            *rgb_buf++ = b;
 
             yuv2rgb(y1, u, v, &r, &g, &b);
-            *rgb_buf++ = b;
-            *rgb_buf++ = g;
             *rgb_buf++ = r;
+            *rgb_buf++ = g;
+            *rgb_buf++ = b;
         }
     }
     return true;
